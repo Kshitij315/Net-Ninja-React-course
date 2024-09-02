@@ -1,32 +1,26 @@
 import { useState } from "react";
-
+import BlogList from "./Bloglist";
 const Home = () => {
 
-    const [name,setName] = useState('dalio') //using hooks to change the state of name
-    const [age,setAge] = useState(25)
-    let [num,setNum]=useState(0)
-const handleClick = () => {
-    // console.log('Button clicked!',event);
-    setName('john');
-    setAge(30);
-    setNum(++num)
-}  
+    const [blogs, setBlogs]=useState([
+        { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
 
-// const handleClickAgain  = (name,e) => {
-//     console.log("Hello "+ name,e.target)
-// }
+        { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
+    
+        { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
+        
+    ]);
+
+const handleDelete = (id) => {
+const newBlogs= blogs.filter(blog => blog.id !==id)
+setBlogs(newBlogs)
+
+}
     return ( 
 
         <div className="home">
-            <h2>Homepage</h2>
-            <div>
-            <p>{name} is {age} years old</p>
-            <p>{num}</p>
-
-            </div>
-            <button onClick={handleClick}>Click me</button>
-            {/* anonymous function */}
-            {/* <button onClick={(e) =>  handleClickAgain('John Doe',e)}>Click me again</button> */}
+         <BlogList blogs={blogs} title="All blogs" handleDelete={handleDelete}/>
+         {/* <BlogList blogs={blogs.filter((blog) => blog.author=== 'mario')} title={"Mario's blogs"}/> */}
         </div>
      );
 }
