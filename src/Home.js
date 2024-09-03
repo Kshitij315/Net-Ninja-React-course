@@ -5,27 +5,28 @@ const Home = () => {
     const [blogs, setBlogs]=useState(null);
 
 const [name,setName]= useState('mario');
+const [isPending,setIsPending]=useState(true);
 
-const handleDelete = (id) => {
-const newBlogs= blogs.filter(blog => blog.id !==id)
-setBlogs(newBlogs)
-
-}
 // runs on every rerender
 useEffect(() => {
-   fetch("http://localhost:8000/blogs")
+    //timeout to show loading longer
+   setTimeout(() => {
+    fetch("http://localhost:8000/blogs")
    .then(res => {
     return res.json();//returns javascript object
  
    })
    .then(data => {
    setBlogs(data);
+   setIsPending(false);
    });
+},1000);
 },[]);
     return ( 
 
         <div className="home">
-         {blogs && <BlogList blogs={blogs} title="All blogs" handleDelete={handleDelete}/>}
+            {isPending  && <div> Loading...</div>}
+         {blogs && <BlogList blogs={blogs} title="All blogs"/>}
          {/* <BlogList blogs={blogs.filter((blog) => blog.author=== 'mario')} title={"Mario's blogs"}/> */}
         {/* <button onClick={() => setName('luigi')}>change name</button>
         <p> {name}</p> */}
