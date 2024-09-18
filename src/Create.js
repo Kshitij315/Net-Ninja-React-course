@@ -1,9 +1,12 @@
 import { useState } from "react";
+import {useNavigate, useNavogate} from "react-router-dom"
+
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("mario");
   const [isPending, setIsPending] = useState(false);
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     //prevents loading the page after pressing submit
@@ -24,6 +27,8 @@ const Create = () => {
     }).then(() => {
       console.log("new blog added");
       setIsPending(false);
+      //redirects user to home page
+      navigate('/')
     });
   };
   return (
