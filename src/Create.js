@@ -56,9 +56,9 @@ const Create = () => {
         </select>
         {!isPending && <button> Add blog</button>}
         {isPending && <button disabled>Adding blog...</button>}
-        <p>{title}</p>
+        {/* <p>{title}</p>
         <p>{body}</p>
-        <p> {author}</p>
+        <p> {author}</p> */}
       </form>
     </div>
   );
